@@ -19,7 +19,7 @@ public class MemberRepositoryTest {
 
     @Test
     @Transactional // 테스트 케이스 후에 db 롤백해버리는 애노테이션
-    // @Rollback(false) 로 설정하면 데이터가 db에 들어감 (롤백하지 않고 커밋해버림)
+    // @Rollback(false) 로 설정하면 데이터가 db에 들어감 (롤백하지 않고 커밋해버림), 이거 해야 insert문 로깅할 수 있음
     public void testMember() throws Exception{
         // given
         Member member = new Member();
