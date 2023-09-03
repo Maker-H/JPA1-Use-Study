@@ -35,4 +35,29 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // 주문 상태 [order, cancel] enum으로 만들거임
+
+    /*
+    public static void main(String[] args) {
+        Member member = new Member();
+        Order order = new Order();
+        member.getOrders().add(order);
+        order.setMember(member);
+    } -> 이런식으로 하지 않고 미리 연관관계 넣어두는 것이 좋다
+
+    */
+
+    //==연관관계 메서드==//
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+    public void addOrderItem(OrderItem orderItem) {
+        orderItemList.add(orderItem);
+        orderItem.setOrder(this);
+    }
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
+
 }
