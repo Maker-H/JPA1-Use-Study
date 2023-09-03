@@ -12,9 +12,9 @@ import javax.transaction.Transactional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class MemberRepositoryTest {
+public class TMPMemberRepositoryTest {
     @Autowired
-    MemberRepository memberRepository;
+    TMPMemberRepository TMPMemberRepository;
 
     @Test
     @Transactional // 테스트 케이스 후에 db 롤백해버리는 애노테이션
@@ -25,8 +25,8 @@ public class MemberRepositoryTest {
         member.setUsername("memberA");
 
         // when
-        Long saveId = memberRepository.save(member);
-        Member findMember = memberRepository.find(saveId);
+        Long saveId = TMPMemberRepository.save(member);
+        Member findMember = TMPMemberRepository.find(saveId);
 
         // then
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
