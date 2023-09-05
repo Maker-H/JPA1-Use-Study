@@ -82,7 +82,6 @@ public class Order {
     }
 
     //==비즈니스 로직==//
-
     /**
      * 주문을 취소하면
      * 1. 배달 완료된지 체크
@@ -98,6 +97,17 @@ public class Order {
         for (OrderItem orderItem : orderItemList) {
             orderItem.cancel();
         }
+    }
+
+    //==조회 로직==//
+    public int getTotalPrice() {
+        int totalPrice = 0;
+
+        for (OrderItem orderItem : orderItemList) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+
+        return totalPrice;
     }
 
 }
