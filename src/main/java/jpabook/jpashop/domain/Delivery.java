@@ -15,12 +15,13 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery")
-    private Order order;
-
     @Embedded
     private Address address;
-/*
+
+    @Enumerated(EnumType.STRING) // ordinal 이면 숫자로 자동 매칭되서 들어감
+    private DeliveryStatus status; // enum으로 READY, COMP
+
+    /*
     @Embedded
     @AttributeOverride(name = "zipCode", column = @Column(name = "home_zipCode"))
     @AttributeOverride(name = "address1", column = @Column(name = "home_address1"))
@@ -28,8 +29,10 @@ public class Delivery {
     private Address homeAddress;
 */
 
-    @Enumerated(EnumType.STRING) // ordinal 이면 숫자로 자동 매칭되서 들어감
-    private DeliveryStatus status; // enum으로 READY, COMP
 
+
+    // 관계 order
+    @OneToOne(mappedBy = "delivery")
+    private Order order;
 
 }

@@ -46,7 +46,7 @@ public class OrderItem {
      * = 주문 생성 => 주문에 따른 주문아이템 생성
      * = 주문 아이템 생성
      */
-    public static OrderItem orderItem(Item item, int orderPrice, int count) {
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setOrderPrice(orderPrice);
