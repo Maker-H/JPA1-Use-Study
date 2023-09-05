@@ -21,8 +21,10 @@ public abstract class Item {
     private Long id;
 
     private String name;
+
     private int price;
-    private int stockQuantity;
+
+    private int stockQuantity; // 아이템 전체에 대한 수량
 
     @ManyToMany(mappedBy = "items")
     private List<Category> items = new ArrayList<>();
