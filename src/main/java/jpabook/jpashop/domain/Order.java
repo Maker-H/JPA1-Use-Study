@@ -20,6 +20,12 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    private LocalDateTime orderDate; // 주문 시간
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status; // 주문 상태 [order, cancel] enum으로 만들거임
+
+    // 관계들 === Member, orderitems, Delivery
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -31,10 +37,7 @@ public class Order {
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
-    private LocalDateTime orderDate; // 주문 시간
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status; // 주문 상태 [order, cancel] enum으로 만들거임
 
     /*
     public static void main(String[] args) {
@@ -58,6 +61,21 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    //==생성 메서드==//
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+
+        return order;
     }
 
 }
